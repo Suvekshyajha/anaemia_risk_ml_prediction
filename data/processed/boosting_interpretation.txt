@@ -1,0 +1,77 @@
+### XGBoost (from 05b)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.705
+- Precision: 0.533
+- Recall (Sensitivity): 0.535
+- F1 Score: 0.534
+- AUC: 0.700
+
+**Confusion Matrix:** TN=362, FP=100, FN=99, TP=114
+
+**Interpretation:**
+- Correctly identifies 53.5% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 53.3% actually are (precision).
+- AUC of 0.700 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 99.
+
+
+---
+
+### LightGBM (from 05b)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.668
+- Precision: 0.478
+- Recall (Sensitivity): 0.554
+- F1 Score: 0.513
+- AUC: 0.681
+
+**Confusion Matrix:** TN=333, FP=129, FN=95, TP=118
+
+**Interpretation:**
+- Correctly identifies 55.4% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 47.8% actually are (precision).
+- AUC of 0.681 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 95.
+
+
+---
+
+### AdaBoost
+
+**Best Hyperparameters:** {'learning_rate': 1.0, 'n_estimators': 100}
+**CV Recall Score:** 0.541
+
+**Test Set Metrics:**
+- Accuracy: 0.716
+- Precision: 0.556
+- Recall (Sensitivity): 0.488
+- F1 Score: 0.520
+- AUC: 0.654
+
+**Confusion Matrix:** TN=379, FP=83, FN=109, TP=104
+
+**Interpretation:**
+- Correctly identifies 48.8% of truly anemic women (recall) — weak for this health screening context.
+- Of women predicted anemic, 55.6% actually are (precision).
+- AUC of 0.654 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 109.
+
+
+---
+
+### Learning Curve Verification
+
+**Observations:**
+- Early stopping selected round 113 as the optimal number of boosting rounds.
+- The learning curve confirms this is close to where test loss plateaus, before overfitting divergence begins.
+
+**Implication:**
+- The early-stopped XGBoost model used in this study's final comparison is protected against the overfitting pattern observed in initial (untuned round-count) experiments.

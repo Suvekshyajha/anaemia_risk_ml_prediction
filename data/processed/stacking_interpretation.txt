@@ -1,0 +1,157 @@
+### Stacking Ensemble (RF+XGB+LGBM → LogReg)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.693
+- Precision: 0.513
+- Recall (Sensitivity): 0.559
+- F1 Score: 0.535
+- AUC: 0.700
+
+**Confusion Matrix:** TN=349, FP=113, FN=94, TP=119
+
+**Interpretation:**
+- Correctly identifies 55.9% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 51.3% actually are (precision).
+- AUC of 0.700 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 94.
+
+
+---
+
+### Random Forest (standalone)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.711
+- Precision: 0.542
+- Recall (Sensitivity): 0.545
+- F1 Score: 0.543
+- AUC: 0.698
+
+**Confusion Matrix:** TN=364, FP=98, FN=97, TP=116
+
+**Interpretation:**
+- Correctly identifies 54.5% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 54.2% actually are (precision).
+- AUC of 0.698 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 97.
+
+
+---
+
+### XGBoost (standalone)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.704
+- Precision: 0.531
+- Recall (Sensitivity): 0.531
+- F1 Score: 0.531
+- AUC: 0.700
+
+**Confusion Matrix:** TN=362, FP=100, FN=100, TP=113
+
+**Interpretation:**
+- Correctly identifies 53.1% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 53.1% actually are (precision).
+- AUC of 0.700 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 100.
+
+
+---
+
+### LightGBM (standalone)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.668
+- Precision: 0.478
+- Recall (Sensitivity): 0.554
+- F1 Score: 0.513
+- AUC: 0.681
+
+**Confusion Matrix:** TN=333, FP=129, FN=95, TP=118
+
+**Interpretation:**
+- Correctly identifies 55.4% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 47.8% actually are (precision).
+- AUC of 0.681 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 95.
+
+
+---
+
+### Random Forest (standalone)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.711
+- Precision: 0.542
+- Recall (Sensitivity): 0.545
+- F1 Score: 0.543
+- AUC: 0.698
+
+**Confusion Matrix:** TN=364, FP=98, FN=97, TP=116
+
+**Interpretation:**
+- Correctly identifies 54.5% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 54.2% actually are (precision).
+- AUC of 0.698 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 97.
+
+
+---
+
+### XGBoost (standalone)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.704
+- Precision: 0.531
+- Recall (Sensitivity): 0.531
+- F1 Score: 0.531
+- AUC: 0.700
+
+**Confusion Matrix:** TN=362, FP=100, FN=100, TP=113
+
+**Interpretation:**
+- Correctly identifies 53.1% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 53.1% actually are (precision).
+- AUC of 0.700 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 100.
+
+
+---
+
+### LightGBM (standalone)
+
+**Best Hyperparameters:** N/A
+**CV Recall Score:** N/A
+
+**Test Set Metrics:**
+- Accuracy: 0.668
+- Precision: 0.478
+- Recall (Sensitivity): 0.554
+- F1 Score: 0.513
+- AUC: 0.681
+
+**Confusion Matrix:** TN=333, FP=129, FN=95, TP=118
+
+**Interpretation:**
+- Correctly identifies 55.4% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 47.8% actually are (precision).
+- AUC of 0.681 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 95.

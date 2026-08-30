@@ -1,18 +1,18 @@
 ### Logistic Regression
 
 **Metrics:**
-- Accuracy: 0.676
-- Precision: 0.488
+- Accuracy: 0.673
+- Precision: 0.484
 - Recall (Sensitivity): 0.573
-- F1 Score: 0.527
-- AUC: 0.694
+- F1 Score: 0.525
+- AUC: 0.693
 
-**Confusion Matrix:** TN=334, FP=128, FN=91, TP=122
+**Confusion Matrix:** TN=332, FP=130, FN=91, TP=122
 
 **Interpretation:**
 - The model correctly identifies 57.3% of truly anemic women (recall) — this is moderate for a health screening context, where missing an anemic case (false negative) is costly.
-- Of women predicted anemic, 48.8% actually are (precision).
-- AUC of 0.694 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- Of women predicted anemic, 48.4% actually are (precision).
+- AUC of 0.693 indicates moderate ability to distinguish anemic from non-anemic women overall.
 - False negatives (missed anemia cases): 91 — a concerning number given clinical implications.
 
 

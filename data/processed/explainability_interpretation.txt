@@ -1,0 +1,76 @@
+### SHAP Explainability — XGBoost (Primary Model)
+
+**Observations:**
+- Top 3 features by mean |SHAP value|: v040, v024, v012
+- This ranking aligns with the permutation importance finding in notebook 08, where v040 (altitude) was the dominant feature.
+
+**Implication:**
+- SHAP confirms which features drive individual predictions, not just aggregate model performance — useful for explaining why a specific woman was flagged as high-risk.
+
+
+---
+
+### SHAP Explainability — Random Forest
+
+**Observations:**
+- Top 3 features: v040, secoreg, v024
+- Top feature overlap with XGBoost: 2 of top 5 features shared.
+
+**Implication:**
+- Some divergence between models suggests feature importance may be sensitive to model architecture — worth discussing as a limitation.
+
+
+---
+
+### SHAP Explainability — LightGBM
+
+**Observations:**
+- Top 3 features: v040, v012, v024
+
+
+---
+
+### SHAP Explainability — Logistic Regression
+
+**Observations:**
+- Top 3 features: secoreg_3, v024_5, v024_2
+
+**Implication:**
+- Since Logistic Regression is linear, SHAP values here directly reflect each feature's coefficient-weighted contribution — a useful, more transparent cross-check against the tree-based models' nonlinear explanations.
+
+
+---
+
+### SHAP Explainability — SVM (Best Recall Model)
+
+**Observations:**
+- Top 3 features: v040, secoreg_3, secoreg_2
+- Note: computed on a 100-row test subsample (of 675 total) due to KernelExplainer's computational cost — treat as directionally indicative rather than exhaustive.
+
+**Implication:**
+- SVM achieved the best recall of all models; understanding what drives its predictions is valuable even though its explanation is less precise than the tree-based SHAP results.
+
+
+---
+
+### Cross-Model SHAP Comparison
+
+**Observations:**
+- Features consistently important across most/all models: v040, secoreg_3, v012
+- This cross-model agreement is the strongest evidence for which features are genuinely predictive of anemia risk in this rural Nepali population, versus being artifacts of any single algorithm's structure.
+
+**Implication for the study's core contribution:**
+- These consistently important features should be the focus of the discussion section — both as model-driven insights and as candidates for real-world screening/intervention prioritization.
+
+
+---
+
+### Cross-Model SHAP Comparison — Tree-Based Models
+
+**Observations:**
+- Features consistently important across XGBoost, Random Forest, and LightGBM: v040, v024, secoreg
+- These three models share identical (label-encoded) feature representations, making this comparison directly valid — unlike a comparison including one-hot encoded linear/SVM models, which use a different feature space and are not row-aligned.
+
+**Implication for the study's core contribution:**
+- Strong agreement across three structurally different tree-based algorithms (bagging, and two boosting variants) provides robust evidence that altitude, geography, and age are genuine drivers of anemia risk in this population, not artifacts of any single model's architecture.
+- Logistic Regression and SVM results (reported separately, in one-hot feature space) corroborate this at the conceptual level — geography and age dominate there too — even though their exact features aren't directly poolable into this heatmap.

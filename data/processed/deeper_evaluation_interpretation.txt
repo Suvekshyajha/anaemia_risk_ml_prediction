@@ -1,0 +1,76 @@
+### Permutation Importance
+
+**Observations:**
+- Most important feature for recall: v040
+- Top 3 features: v040, v012, had_recent_birth
+
+**Implication:**
+- These features drive the model's ability to correctly identify anemic women — a useful preview before deeper SHAP analysis in notebook 10.
+
+
+---
+
+### Threshold Tuning
+
+**Observations:**
+- Default threshold (0.5) balances precision/recall at fixed levels.
+- Lowering the threshold to 0.37 increases recall to 0.822 while keeping precision at 0.400.
+
+**Implication:**
+- In a health screening context, prioritizing recall (catching more true anemia cases) over precision is often preferable, since a missed case is costlier than a false alarm. Consider reporting model performance at this adjusted threshold alongside the default.
+
+
+---
+
+### Subgroup Analysis — Performance by Province
+
+**Observations:**
+- Recall ranges from 0.05 to 1.00 across provinces.
+
+**Implication:**
+- Meaningful performance variation across provinces — worth investigating whether this reflects sample size differences or genuine regional feature distribution differences.
+
+
+---
+
+### Subgroup Analysis — Performance by Province (Revised)
+
+**Observations:**
+- Recall varies substantially by province: from 0.05 (Province 5) to 1.00 (Province 1).
+- Sample sizes are reasonably balanced across provinces (n=86–113), reducing the likelihood this is purely a small-sample artifact.
+- Actual positive case counts per province: [fill in from the groupby output above]
+- Provinces 2, 3, and 5 show notably weaker recall (0.05–0.26) compared to Provinces 1, 4, and 6 (0.60–1.0).
+
+**Implication for modeling and interpretation:**
+- This suggests the model's learned patterns generalize unevenly across Nepal's provinces — possibly because province-specific risk factors (dietary patterns, healthcare access, altitude distribution within province) aren't fully captured by the current feature set.
+- This is a genuine limitation worth reporting transparently rather than an error to hide: a single national model may underperform for women in provinces whose risk profile differs from the national-average pattern the model learned.
+- Future work could explore province-stratified models or adding province as an interaction term more explicitly (beyond a single categorical feature) to address this disparity.
+
+
+---
+
+### Decision Curve Analysis — Clinical Utility
+
+**Observations:**
+- The model provides positive net benefit over both "refer all" and "refer none" strategies across a threshold range of approximately 0.10 to 0.85.
+- Net benefit is maximized around threshold 0.10.
+
+**Implication for deployment:**
+- Unlike a fixed 0.5 classification threshold (a modeling convention with no clinical grounding), this analysis identifies the threshold range where model-guided referral genuinely outperforms both blanket referral and no screening at all.
+- For a community health worker deployment context, a threshold near 0.10 would maximize the practical value of the tool — balancing the cost of unnecessary referrals against the cost of missed anemia cases.
+- This threshold, not the default 0.5, is the more defensible choice for real-world screening deployment.
+
+
+---
+
+### Algorithmic Fairness — Geographic Equity in Anemia Detection
+
+**Observations:**
+- A chi-square test of independence between province and correct anemia detection yields p = 0.0000, indicating the observed disparity in detection rates across provinces is unlikely to be due to chance alone.
+- Detection (recall) ranges from 0.05 to 1.00 across provinces with reasonably comparable sample sizes (n=86-113).
+
+**Implication — algorithmic fairness in health screening deployment:**
+- A single nationally-trained model does not provide equitable anemia detection across Nepal's provinces. Women in lower-recall provinces would be systematically under-flagged by this tool relative to women in higher-recall provinces.
+- This raises a deployment-ethics question distinct from raw predictive performance: should a model with demonstrated geographic performance disparity be deployed uniformly, or does responsible deployment require province-specific threshold calibration or province-stratified models?
+- This finding is only observable because this study uses nationally representative survey data spanning multiple provinces — a structural advantage over single-site clinical datasets, which cannot surface this kind of geographic equity concern.
+- Future work should investigate whether this disparity stems from feature distribution differences (e.g., altitude/geography features behaving differently by province), sample size effects, or genuine gaps in how well the model's learned patterns transfer across regions.
