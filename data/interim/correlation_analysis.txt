@@ -1,0 +1,9 @@
+### Correlation Heatmap — Numeric Features
+
+**Observations:**
+- Strongest correlation with hemoglobin: anemia_binary (r=-0.76)
+- High inter-feature correlations (|r| > 0.5): hemoglobin & anemia_binary: -0.76, education_years & age: -0.55
+
+**Implication for modeling:**
+- Multicollinearity detected — consider dropping or combining correlated features, especially important for logistic regression and DNN stability (tree ensembles are more robust to this)
+- Weak linear correlations with hemoglobin are expected and not concerning — anemia risk is typically driven by combinations of factors and nonlinear relationships, which is exactly what tree ensembles and SHAP are suited to capture

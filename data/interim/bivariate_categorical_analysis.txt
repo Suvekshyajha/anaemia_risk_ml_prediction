@@ -1,0 +1,87 @@
+### v190a — wealth index for urban/rural vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 5 (45.3%)
+- Lowest anemia rate: Code 1 (19.5%)
+- Chi-square test p-value: 0.0000 — statistically significant
+
+**Implication for modeling:**
+- Shows meaningful association with anemia status — promising categorical predictor
+
+
+---
+
+### v106 — highest educational level vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 3 (43.3%)
+- Lowest anemia rate: Code 2 (30.2%)
+- Chi-square test p-value: 0.1122 — not statistically significant
+
+**Implication for modeling:**
+- No strong univariate association — may still interact with other features
+
+
+---
+
+### v116 — type of toilet facility vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 14 (75.0%)
+- Lowest anemia rate: Code 15 (0.0%)
+- Chi-square test p-value: 0.0000 — statistically significant
+
+**Implication for modeling:**
+- Shows meaningful association with anemia status — promising categorical predictor
+
+
+---
+
+### v113 — source of drinking water vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 21 (52.1%)
+- Lowest anemia rate: Code 96 (0.0%)
+- Chi-square test p-value: 0.0000 — statistically significant
+
+**Implication for modeling:**
+- Shows meaningful association with anemia status — promising categorical predictor
+
+
+---
+
+### v013 — age in 5-year groups vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 7 (36.5%)
+- Lowest anemia rate: Code 4 (26.3%)
+- Chi-square test p-value: 0.1019 — not statistically significant
+
+**Implication for modeling:**
+- No strong univariate association — may still interact with other features
+
+
+---
+
+### v024 — province vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 2 (53.0%)
+- Lowest anemia rate: Code 6 (20.7%)
+- Chi-square test p-value: 0.0000 — statistically significant
+
+**Implication for modeling:**
+- Shows meaningful association with anemia status — promising categorical predictor
+
+
+---
+
+### secoreg — ecological region vs. Anemia Status
+
+**Observations:**
+- Highest anemia rate: Code 3 (49.2%)
+- Lowest anemia rate: Code 2 (19.9%)
+- Chi-square test p-value: 0.0000 — statistically significant
+
+**Implication for modeling:**
+- Shows meaningful association with anemia status — promising categorical predictor

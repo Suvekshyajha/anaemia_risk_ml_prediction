@@ -1,0 +1,81 @@
+### v456 — hemoglobin level adjusted for altitude and smoking (g/dl - 1 decimal)
+
+**Observations:**
+- N (non-missing): 3371
+- Missing: 50.6%
+- Mean: 12.58, Median: 12.70, Std Dev: 1.61
+- Range: 4.20 to 18.70
+- Distribution shape: roughly symmetric (left-skewed), skewness = -0.42
+- Note: raw value divided by 10 to correct DHS storage scale
+
+**Implication for modeling:**
+- No transformation likely needed
+- High missingness — needs explicit handling strategy, not blind imputation
+
+
+---
+
+### v133 — education in single years
+
+**Observations:**
+- N (non-missing): 6826
+- Missing: 0.0%
+- Mean: 5.43, Median: 6.00, Std Dev: 4.50
+- Range: 0.00 to 13.00
+- Distribution shape: roughly symmetric (right-skewed), skewness = 0.00
+
+
+**Implication for modeling:**
+- No transformation likely needed
+- Missingness low enough for standard imputation if needed
+
+
+---
+
+### m14_1 — number of antenatal visits during pregnancy
+
+**Observations:**
+- N (non-missing): 1409
+- Missing: 79.4%
+- Mean: 4.32, Median: 4.00, Std Dev: 2.97
+- Range: 0.00 to 98.00
+- Distribution shape: highly skewed (right-skewed), skewness = 22.43
+
+
+**Implication for modeling:**
+- Consider transformation (e.g. log) given skew
+- High missingness — needs explicit handling strategy, not blind imputation
+
+
+---
+
+### v012 — respondent's current age
+
+**Observations:**
+- N (non-missing): 6826
+- Missing: 0.0%
+- Mean: 29.74, Median: 29.00, Std Dev: 9.89
+- Range: 15.00 to 49.00
+- Distribution shape: roughly symmetric (right-skewed), skewness = 0.23
+
+
+**Implication for modeling:**
+- No transformation likely needed
+- Missingness low enough for standard imputation if needed
+
+
+---
+
+### v040 — cluster altitude in meters
+
+**Observations:**
+- N (non-missing): 6826
+- Missing: 0.0%
+- Mean: 902.03, Median: 859.00, Std Dev: 753.26
+- Range: 67.00 to 4103.00
+- Distribution shape: moderately skewed (right-skewed), skewness = 0.57
+
+
+**Implication for modeling:**
+- No transformation likely needed
+- Missingness low enough for standard imputation if needed

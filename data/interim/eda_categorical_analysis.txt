@@ -1,0 +1,180 @@
+### v457 — anemia level
+
+**Observations:**
+- Number of categories: 4
+- Missing: 50.6%
+- Dominant category: Code nan (50.6%)
+- Category breakdown:
+  - Code nan: 3455 (50.6%)
+  - Code 4.0: 2307 (33.8%)
+  - Code 3.0: 606 (8.9%)
+  - Code 2.0: 429 (6.3%)
+  - Code 1.0: 29 (0.4%)
+- Balance: moderately imbalanced
+
+**Implication for modeling:**
+- Category count is manageable — encode directly
+- No major imbalance concern at the feature level
+
+
+---
+
+### v190a — wealth index for urban/rural
+
+**Observations:**
+- Number of categories: 5
+- Missing: 0.0%
+- Dominant category: Code 1 (24.7%)
+- Category breakdown:
+  - Code 1: 1689 (24.7%)
+  - Code 2: 1341 (19.6%)
+  - Code 4: 1277 (18.7%)
+  - Code 5: 1263 (18.5%)
+  - Code 3: 1256 (18.4%)
+- Balance: relatively balanced
+
+**Implication for modeling:**
+- Category count is manageable — encode directly
+- No major imbalance concern at the feature level
+
+
+---
+
+### v106 — highest educational level
+
+**Observations:**
+- Number of categories: 4
+- Missing: 0.0%
+- Dominant category: Code 1 (34.0%)
+- Category breakdown:
+  - Code 1: 2323 (34.0%)
+  - Code 2: 2254 (33.0%)
+  - Code 0: 2137 (31.3%)
+  - Code 3: 112 (1.6%)
+- Balance: relatively balanced
+
+**Implication for modeling:**
+- Category count is manageable — encode directly
+- No major imbalance concern at the feature level
+
+
+---
+
+### v116 — type of toilet facility
+
+**Observations:**
+- Number of categories: 12
+- Missing: 0.0%
+- Dominant category: Code 13 (51.0%)
+- Category breakdown:
+  - Code 13: 3484 (51.0%)
+  - Code 12: 1835 (26.9%)
+  - Code 31: 499 (7.3%)
+  - Code 97: 373 (5.5%)
+  - Code 45: 284 (4.2%)
+  - Code 22: 226 (3.3%)
+  - Code 21: 61 (0.9%)
+  - Code 23: 34 (0.5%)
+  - Code 11: 14 (0.2%)
+  - Code 14: 11 (0.2%)
+  - Code 15: 4 (0.1%)
+  - Code 96: 1 (0.0%)
+- Balance: moderately imbalanced
+
+**Implication for modeling:**
+- Consider grouping rare/small categories before encoding
+- No major imbalance concern at the feature level
+
+
+---
+
+### v113 — source of drinking water
+
+**Observations:**
+- Number of categories: 13
+- Missing: 0.0%
+- Dominant category: Code 12 (41.6%)
+- Category breakdown:
+  - Code 12: 2842 (41.6%)
+  - Code 21: 1994 (29.2%)
+  - Code 14: 1040 (15.2%)
+  - Code 97: 373 (5.5%)
+  - Code 11: 126 (1.8%)
+  - Code 42: 123 (1.8%)
+  - Code 13: 111 (1.6%)
+  - Code 41: 107 (1.6%)
+  - Code 32: 59 (0.9%)
+  - Code 31: 19 (0.3%)
+  - Code 43: 17 (0.2%)
+  - Code 71: 14 (0.2%)
+  - Code 96: 1 (0.0%)
+- Balance: moderately imbalanced
+
+**Implication for modeling:**
+- Consider grouping rare/small categories before encoding
+- No major imbalance concern at the feature level
+
+
+---
+
+### v013 — age in 5-year groups
+
+**Observations:**
+- Number of categories: 7
+- Missing: 0.0%
+- Dominant category: Code 1 (19.6%)
+- Category breakdown:
+  - Code 1: 1338 (19.6%)
+  - Code 2: 1150 (16.8%)
+  - Code 3: 1046 (15.3%)
+  - Code 5: 933 (13.7%)
+  - Code 4: 919 (13.5%)
+  - Code 6: 806 (11.8%)
+  - Code 7: 634 (9.3%)
+- Balance: relatively balanced
+
+**Implication for modeling:**
+- Consider grouping rare/small categories before encoding
+- No major imbalance concern at the feature level
+
+
+---
+
+### v024 — province
+
+**Observations:**
+- Number of categories: 7
+- Missing: 0.0%
+- Dominant category: Code 2 (15.8%)
+- Category breakdown:
+  - Code 2: 1077 (15.8%)
+  - Code 1: 1074 (15.7%)
+  - Code 5: 1052 (15.4%)
+  - Code 6: 1010 (14.8%)
+  - Code 7: 996 (14.6%)
+  - Code 3: 832 (12.2%)
+  - Code 4: 785 (11.5%)
+- Balance: relatively balanced
+
+**Implication for modeling:**
+- Consider grouping rare/small categories before encoding
+- No major imbalance concern at the feature level
+
+
+---
+
+### secoreg — ecological region
+
+**Observations:**
+- Number of categories: 3
+- Missing: 0.0%
+- Dominant category: Code 2 (47.5%)
+- Category breakdown:
+  - Code 2: 3239 (47.5%)
+  - Code 3: 2669 (39.1%)
+  - Code 1: 918 (13.4%)
+- Balance: moderately imbalanced
+
+**Implication for modeling:**
+- Category count is manageable — encode directly
+- No major imbalance concern at the feature level

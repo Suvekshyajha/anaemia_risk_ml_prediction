@@ -1,0 +1,52 @@
+### v133 — education in single years vs. Anemia Status
+
+**Observations:**
+- Not anemic: mean=5.54, median=6.00 (n=2307)
+- Anemic: mean=5.33, median=6.00 (n=1064)
+- Difference: anemic group lower
+- Mann-Whitney U test p-value: 0.2488 — not statistically significant
+
+**Implication for modeling:**
+- No strong univariate signal — may still matter in combination with other features (check later via SHAP)
+
+
+---
+
+### m14_1_clean —  vs. Anemia Status
+
+**Observations:**
+- Not anemic: mean=4.34, median=4.00 (n=468)
+- Anemic: mean=4.32, median=4.00 (n=238)
+- Difference: anemic group lower
+- Mann-Whitney U test p-value: 0.3418 — not statistically significant
+
+**Implication for modeling:**
+- No strong univariate signal — may still matter in combination with other features (check later via SHAP)
+
+
+---
+
+### v012 — respondent's current age vs. Anemia Status
+
+**Observations:**
+- Not anemic: mean=29.53, median=29.00 (n=2307)
+- Anemic: mean=29.65, median=28.00 (n=1064)
+- Difference: anemic group higher
+- Mann-Whitney U test p-value: 0.8914 — not statistically significant
+
+**Implication for modeling:**
+- No strong univariate signal — may still matter in combination with other features (check later via SHAP)
+
+
+---
+
+### v040 — cluster altitude in meters vs. Anemia Status
+
+**Observations:**
+- Not anemic: mean=1039.06, median=1085.00 (n=2307)
+- Anemic: mean=629.96, median=162.00 (n=1064)
+- Difference: anemic group lower
+- Mann-Whitney U test p-value: 0.0000 — statistically significant
+
+**Implication for modeling:**
+- This feature shows a meaningful group difference and is a promising predictor

@@ -1,0 +1,116 @@
+### Logistic Regression
+
+**Metrics:**
+- Accuracy: 0.676
+- Precision: 0.488
+- Recall (Sensitivity): 0.573
+- F1 Score: 0.527
+- AUC: 0.694
+
+**Confusion Matrix:** TN=334, FP=128, FN=91, TP=122
+
+**Interpretation:**
+- The model correctly identifies 57.3% of truly anemic women (recall) — this is moderate for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 48.8% actually are (precision).
+- AUC of 0.694 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 91 — a concerning number given clinical implications.
+
+
+---
+
+### Decision Tree
+
+**Metrics:**
+- Accuracy: 0.693
+- Precision: 0.514
+- Recall (Sensitivity): 0.531
+- F1 Score: 0.522
+- AUC: 0.679
+
+**Confusion Matrix:** TN=355, FP=107, FN=100, TP=113
+
+**Interpretation:**
+- The model correctly identifies 53.1% of truly anemic women (recall) — this is moderate for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 51.4% actually are (precision).
+- AUC of 0.679 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 100 — a concerning number given clinical implications.
+
+
+---
+
+### KNN
+
+**Metrics:**
+- Accuracy: 0.708
+- Precision: 0.565
+- Recall (Sensitivity): 0.329
+- F1 Score: 0.415
+- AUC: 0.700
+
+**Confusion Matrix:** TN=408, FP=54, FN=143, TP=70
+
+**Interpretation:**
+- The model correctly identifies 32.9% of truly anemic women (recall) — this is weak for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 56.5% actually are (precision).
+- AUC of 0.700 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 143 — a concerning number given clinical implications.
+
+
+---
+
+### KNN (scaled)
+
+**Metrics:**
+- Accuracy: 0.689
+- Precision: 0.513
+- Recall (Sensitivity): 0.286
+- F1 Score: 0.367
+- AUC: 0.659
+
+**Confusion Matrix:** TN=404, FP=58, FN=152, TP=61
+
+**Interpretation:**
+- The model correctly identifies 28.6% of truly anemic women (recall) — this is weak for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 51.3% actually are (precision).
+- AUC of 0.659 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 152 — a concerning number given clinical implications.
+
+
+---
+
+### SVM
+
+**Metrics:**
+- Accuracy: 0.677
+- Precision: 0.490
+- Recall (Sensitivity): 0.577
+- F1 Score: 0.530
+- AUC: 0.688
+
+**Confusion Matrix:** TN=334, FP=128, FN=90, TP=123
+
+**Interpretation:**
+- The model correctly identifies 57.7% of truly anemic women (recall) — this is moderate for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 49.0% actually are (precision).
+- AUC of 0.688 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 90 — a concerning number given clinical implications.
+
+
+---
+
+### Logistic Regression (L1 Regularized)
+
+**Metrics:**
+- Accuracy: 0.671
+- Precision: 0.482
+- Recall (Sensitivity): 0.573
+- F1 Score: 0.524
+- AUC: 0.688
+
+**Confusion Matrix:** TN=331, FP=131, FN=91, TP=122
+
+**Interpretation:**
+- The model correctly identifies 57.3% of truly anemic women (recall) — this is moderate for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 48.2% actually are (precision).
+- AUC of 0.688 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 91 — a concerning number given clinical implications.
