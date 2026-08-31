@@ -1,0 +1,28 @@
+# DHS raw data
+data/raw/
+
+# Generated/intermediate data
+data/interim/
+data/processed/
+
+# Models
+models/
+*.pkl
+*.pickle
+*.joblib
+
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.*
+!.env.example
