@@ -1,0 +1,47 @@
+
+================================================================================
+NOTEBOOK: 01_eda.ipynb
+================================================================================
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+pd.set_option('display.max_columns', 100)
+sns.set_style('whitegrid')
+
+df = pd.read_stata('../data/raw/NPIR82FL.DTA', convert_categoricals=False)
+print("Shape:", df.shape)
+df.head()
+
+df.info(verbose=False)  # quick dtype/memory overview
+df.columns.tolist()[:30]  # peek at first 30 variable names
+
+df['v025'].value_counts(normalize=True) * 100
+
+rural_df = df[df['v025'] == 2].copy()
+print("Rural sample shape:", rural_df.shape)
+
+#top 20 missing variables
+missing_pct = df.isnull().mean().sort_values(ascending=False) * 100
+print(missing_pct.head(20))
+
+
+================================================================================
+NOTEBOOK: 02_eda_rural.ipynb
+================================================================================
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+df = pd.read_pickle('../data/interim/rural_ir.pkl')
+
+
+================================================================================
+NOTEBOOK: 03_preprocessing.ipynb
+================================================================================
+

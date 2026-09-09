@@ -33,6 +33,17 @@
 
 ---
 
+### Subgroup Analysis — Performance by Province
+
+**Observations:**
+- Recall ranges from 0.05 to 1.00 across provinces.
+
+**Implication:**
+- Meaningful performance variation across provinces — worth investigating whether this reflects sample size differences or genuine regional feature distribution differences.
+
+
+---
+
 ### Subgroup Analysis — Performance by Province (Revised)
 
 **Observations:**
