@@ -1883,6 +1883,337 @@ for name, model in [('Random Forest (aggressive+threshold)', rf_aggressive),
 
 
 ================================================================================
+NOTEBOOK: 13_accuracy_precision_auc_improvements.ipynb
+================================================================================
+
+import pandas as pd
+import numpy as np
+import pickle
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.model_selection import StratifiedKFold, RepeatedStratifiedKFold, cross_val_score
+from IPython.display import display, Markdown
+
+X_train = pd.read_pickle('../data/processed/tree_ready/X_train.pkl')
+X_test = pd.read_pickle('../data/processed/tree_ready/X_test.pkl')
+y_train = pd.read_pickle('../data/processed/tree_ready/y_train.pkl')
+y_test = pd.read_pickle('../data/processed/tree_ready/y_test.pkl')
+
+results = []
+
+def evaluate(name, model, X, y):
+    pred = model.predict(X)
+    proba = model.predict_proba(X)[:, 1] if hasattr(model, 'predict_proba') else None
+    r = {'model': name, 'accuracy': accuracy_score(y, pred), 'precision': precision_score(y, pred, zero_division=0),
+         'recall': recall_score(y, pred), 'f1': f1_score(y, pred),
+         'auc': roc_auc_score(y, proba) if proba is not None else np.nan}
+    results.append(r)
+    print(r)
+    return r
+
+rural_df = pd.read_pickle('../data/interim/rural_ir.pkl')
+
+new_vars = ['m45_1', 's235b', 'h22_1']  # iron tablets, iron-folic acid (15-19), fever last 2 weeks
+for v in new_vars:
+    print(v, ':', rural_df[v].isnull().mean()*100 if v in rural_df.columns else "NOT FOUND", "% missing")
+
+ordinal_maps = {
+    'v190a': {1: 0, 2: 1, 3: 2, 4: 3, 5: 4},  # poorest -> richest, confirm your actual code order
+    'v013': {1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6},  # age groups already ordered
+}
+# Apply explicitly instead of relying on LabelEncoder's arbitrary fit order
+for col, mapping in ordinal_maps.items():
+    X_train[col] = X_train[col].map(mapping)
+    X_test[col] = X_test[col].map(mapping)
+
+def frequency_encode(train_col, test_col):
+    freq = train_col.value_counts(normalize=True)
+    return train_col.map(freq), test_col.map(freq).fillna(0)
+
+X_train['v113_freq'], X_test['v113_freq'] = frequency_encode(X_train['v113'], X_test['v113'])
+X_train['v116_freq'], X_test['v116_freq'] = frequency_encode(X_train['v116'], X_test['v116'])
+
+from catboost import CatBoostClassifier  # pip install catboost
+
+from sklearn.ensemble import ExtraTreesClassifier, GradientBoostingClassifier
+from sklearn.impute import SimpleImputer
+
+# CatBoost
+cat = CatBoostClassifier(
+    iterations=300,
+    depth=6,
+    learning_rate=0.05,
+    scale_pos_weight=(y_train == 0).sum() / (y_train == 1).sum(),
+    random_state=42,
+    verbose=0
+)
+
+cat.fit(X_train, y_train)
+
+evaluate('CatBoost', cat, X_test, y_test)
+
+
+# Extra Trees
+et = ExtraTreesClassifier(
+    n_estimators=300,
+    max_depth=10,
+    class_weight='balanced',
+    random_state=42,
+    n_jobs=-1
+)
+
+et.fit(X_train, y_train)
+
+evaluate('Extra Trees', et, X_test, y_test)
+
+
+# Gradient Boosting - handle NaN values
+imputer = SimpleImputer(strategy='median')
+
+X_train_gb = imputer.fit_transform(X_train)
+X_test_gb = imputer.transform(X_test)
+
+gb = GradientBoostingClassifier(
+    n_estimators=300,
+    max_depth=4,
+    learning_rate=0.05,
+    random_state=42
+)
+
+gb.fit(X_train_gb, y_train)
+
+evaluate('Sklearn Gradient Boosting', gb, X_test_gb, y_test)
+
+
+
+from xgboost import XGBClassifier
+
+rskf = RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=42)
+xgb = XGBClassifier(n_estimators=300, max_depth=6, learning_rate=0.05,
+                     scale_pos_weight=(y_train==0).sum()/(y_train==1).sum(),
+                     random_state=42, eval_metric='logloss')
+
+auc_scores = cross_val_score(xgb, X_train, y_train, cv=rskf, scoring='roc_auc', n_jobs=-1)
+print(f"AUC across 50 folds: mean={auc_scores.mean():.3f}, std={auc_scores.std():.3f}")
+
+from sklearn.ensemble import VotingClassifier
+
+with open('../models/ml/random_forest.pkl', 'rb') as f: best_rf = pickle.load(f)
+with open('../models/ml/xgboost.pkl', 'rb') as f: best_xgb = pickle.load(f)
+with open('../models/ml/lightgbm.pkl', 'rb') as f: best_lgbm = pickle.load(f)
+
+# Weight by individual AUC performance rather than equal voting
+voting = VotingClassifier(
+    estimators=[('rf', best_rf), ('xgb', best_xgb), ('lgbm', best_lgbm)],
+    voting='soft', weights=[1, 1.5, 1.2]  # tune based on each model's standalone AUC
+)
+voting.fit(X_train, y_train)
+evaluate('Weighted Voting Ensemble', voting, X_test, y_test)
+
+results_df = pd.DataFrame(results).sort_values('auc', ascending=False)
+print(results_df)
+results_df.to_csv('../results/metrics/accuracy_improvement_experiments.csv', index=False)
+
+
+
+
+================================================================================
+NOTEBOOK: 14_catboost_original_features.ipynb
+================================================================================
+
+import pandas as pd
+import numpy as np
+import os
+import pickle
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report, confusion_matrix
+from catboost import CatBoostClassifier
+
+
+df = pd.read_pickle('../data/interim/rural_cleaned.pkl')
+
+print('Dataset shape:', df.shape)
+print('\nColumns:')
+print(df.columns.tolist())
+df.head()
+
+
+print('Data types:')
+print(df.dtypes)
+
+print('\nMissing values:')
+print(df.isnull().sum())
+
+
+target = 'anemia_binary'
+
+print(df[target].value_counts())
+print('\nPercentage:')
+print(df[target].value_counts(normalize=True) * 100)
+
+
+# IMPORTANT: Use the same predictor variables defined in your research methodology.
+# Do NOT automatically use every column in rural_cleaned.pkl.
+# Update this list if your existing feature-engineering notebook used a different set.
+
+predictor_cols = [
+    'v190a', 'v106', 'v133', 'm14_1', 'v113', 'v116',
+    'v012', 'v013', 'v024', 'v025', 'v151', 'v136', 'v201'
+]
+
+# Keep only predictors that actually exist in the dataset
+predictor_cols = [col for col in predictor_cols if col in df.columns]
+
+print('Predictors being used:')
+print(predictor_cols)
+
+X = df[predictor_cols].copy()
+y = df[target].copy()
+
+print('\nX shape:', X.shape)
+print('y shape:', y.shape)
+
+
+# Safety check: make sure target-related variables are NOT predictors
+leakage_cols = ['anemia_binary', 'v456', 'v457', 'anemia_level']
+print('Potential leakage columns present in X:', [c for c in leakage_cols if c in X.columns])
+
+
+# Categorical DHS variables
+# Wealth, education and age group are ordinal, but this experiment treats them as categories.
+cat_cols = [
+    'v106',   # education level
+    'v190a',  # wealth index
+    'v113',   # water source
+    'v116',   # toilet type
+    'v024',   # province
+    'v025',   # residence
+    'v151',   # ecological region
+    'v013'    # age group
+]
+
+cat_cols = [col for col in cat_cols if col in X.columns]
+
+print('Categorical columns:')
+print(cat_cols)
+
+# CatBoost expects categorical values to be strings and without NaN
+for col in cat_cols:
+    X[col] = X[col].fillna('Missing').astype(str)
+
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.20,
+    random_state=42,
+    stratify=y
+)
+
+print('Training set:', X_train.shape)
+print('Test set:', X_test.shape)
+
+
+negative = (y_train == 0).sum()
+positive = (y_train == 1).sum()
+scale_pos_weight = negative / positive
+
+print('Negative cases:', negative)
+print('Positive cases:', positive)
+print('Scale positive weight:', scale_pos_weight)
+
+
+cat = CatBoostClassifier(
+    iterations=1000,
+    depth=6,
+    learning_rate=0.03,
+    loss_function='Logloss',
+    eval_metric='AUC',
+    scale_pos_weight=scale_pos_weight,
+    random_state=42,
+    verbose=100,
+    allow_writing_files=False
+)
+
+cat.fit(
+    X_train,
+    y_train,
+    cat_features=cat_cols,
+    eval_set=(X_test, y_test),
+    early_stopping_rounds=100,
+    verbose=100
+)
+
+
+pred = cat.predict(X_test).astype(int).flatten()
+proba = cat.predict_proba(X_test)[:, 1]
+
+accuracy = accuracy_score(y_test, pred)
+precision = precision_score(y_test, pred, zero_division=0)
+recall = recall_score(y_test, pred)
+f1 = f1_score(y_test, pred)
+auc = roc_auc_score(y_test, proba)
+
+print('========== CATBOOST RESULTS ==========')
+print(f'Accuracy : {accuracy:.4f}')
+print(f'Precision: {precision:.4f}')
+print(f'Recall   : {recall:.4f}')
+print(f'F1 Score : {f1:.4f}')
+print(f'AUC      : {auc:.4f}')
+
+
+print(classification_report(y_test, pred))
+
+cm = confusion_matrix(y_test, pred)
+print('Confusion Matrix:')
+print(cm)
+
+
+feature_importance = pd.DataFrame({
+    'feature': X.columns,
+    'importance': cat.feature_importances_
+}).sort_values('importance', ascending=False)
+
+feature_importance
+
+
+import matplotlib.pyplot as plt
+
+top_features = feature_importance.head(15).sort_values('importance')
+
+plt.figure(figsize=(10, 6))
+plt.barh(top_features['feature'], top_features['importance'])
+plt.xlabel('Feature Importance')
+plt.ylabel('Features')
+plt.title('Top CatBoost Feature Importances')
+plt.show()
+
+
+results = pd.DataFrame([{
+    'model': 'CatBoost Original Features',
+    'accuracy': accuracy,
+    'precision': precision,
+    'recall': recall,
+    'f1': f1,
+    'auc': auc
+}])
+
+os.makedirs('../results/metrics', exist_ok=True)
+results.to_csv('../results/metrics/catboost_original_features.csv', index=False)
+
+print(results)
+print('\nResults saved successfully.')
+
+
+os.makedirs('../models/ml', exist_ok=True)
+
+with open('../models/ml/catboost_original_features.pkl', 'wb') as f:
+    pickle.dump(cat, f)
+
+print('CatBoost model saved successfully!')
+
+
+
+================================================================================
 NOTEBOOK: verify_sample_size.ipynb
 ================================================================================
 
