@@ -4,19 +4,19 @@
 **CV Recall Score:** N/A
 
 **Test Set Metrics:**
-- Accuracy: 0.692
-- Precision: 0.511
-- Recall (Sensitivity): 0.531
-- F1 Score: 0.521
-- AUC: 0.704
+- Accuracy: 0.716
+- Precision: 0.549
+- Recall (Sensitivity): 0.549
+- F1 Score: 0.549
+- AUC: 0.705
 
-**Confusion Matrix:** TN=354, FP=108, FN=100, TP=113
+**Confusion Matrix:** TN=366, FP=96, FN=96, TP=117
 
 **Interpretation:**
-- Correctly identifies 53.1% of truly anemic women (recall) — moderate for this health screening context.
-- Of women predicted anemic, 51.1% actually are (precision).
-- AUC of 0.704 indicates moderate discriminative ability.
-- False negatives (missed anemia cases): 100.
+- Correctly identifies 54.9% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 54.9% actually are (precision).
+- AUC of 0.705 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 96.
 
 
 ---
@@ -27,19 +27,19 @@
 **CV Recall Score:** N/A
 
 **Test Set Metrics:**
-- Accuracy: 0.668
-- Precision: 0.478
-- Recall (Sensitivity): 0.554
-- F1 Score: 0.513
-- AUC: 0.681
+- Accuracy: 0.689
+- Precision: 0.506
+- Recall (Sensitivity): 0.559
+- F1 Score: 0.531
+- AUC: 0.700
 
-**Confusion Matrix:** TN=333, FP=129, FN=95, TP=118
+**Confusion Matrix:** TN=346, FP=116, FN=94, TP=119
 
 **Interpretation:**
-- Correctly identifies 55.4% of truly anemic women (recall) — moderate for this health screening context.
-- Of women predicted anemic, 47.8% actually are (precision).
-- AUC of 0.681 indicates moderate discriminative ability.
-- False negatives (missed anemia cases): 95.
+- Correctly identifies 55.9% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 50.6% actually are (precision).
+- AUC of 0.700 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 94.
 
 
 ---
@@ -47,22 +47,22 @@
 ### AdaBoost
 
 **Best Hyperparameters:** {'learning_rate': 1.0, 'n_estimators': 100}
-**CV Recall Score:** 0.541
+**CV Recall Score:** 0.545
 
 **Test Set Metrics:**
-- Accuracy: 0.716
-- Precision: 0.556
-- Recall (Sensitivity): 0.488
-- F1 Score: 0.520
-- AUC: 0.654
+- Accuracy: 0.705
+- Precision: 0.532
+- Recall (Sensitivity): 0.554
+- F1 Score: 0.543
+- AUC: 0.664
 
-**Confusion Matrix:** TN=379, FP=83, FN=109, TP=104
+**Confusion Matrix:** TN=358, FP=104, FN=95, TP=118
 
 **Interpretation:**
-- Correctly identifies 48.8% of truly anemic women (recall) — weak for this health screening context.
-- Of women predicted anemic, 55.6% actually are (precision).
-- AUC of 0.654 indicates moderate discriminative ability.
-- False negatives (missed anemia cases): 109.
+- Correctly identifies 55.4% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 53.2% actually are (precision).
+- AUC of 0.664 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 95.
 
 
 ---
@@ -70,7 +70,7 @@
 ### Learning Curve Verification
 
 **Observations:**
-- Early stopping selected round 134 as the optimal number of boosting rounds.
+- Early stopping selected round 91 as the optimal number of boosting rounds.
 - The learning curve confirms this is close to where test loss plateaus, before overfitting divergence begins.
 
 **Implication:**

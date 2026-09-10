@@ -2,7 +2,7 @@
 
 **Observations:**
 - Most important feature for recall: v040
-- Top 3 features: v040, v012, had_recent_birth
+- Top 3 features: v040, v312, v106
 
 **Implication:**
 - These features drive the model's ability to correctly identify anemic women — a useful preview before deeper SHAP analysis in notebook 10.
@@ -25,7 +25,7 @@
 ### Subgroup Analysis — Performance by Province
 
 **Observations:**
-- Recall ranges from 0.05 to 1.00 across provinces.
+- Recall ranges from 0.00 to 1.00 across provinces.
 
 **Implication:**
 - Meaningful performance variation across provinces — worth investigating whether this reflects sample size differences or genuine regional feature distribution differences.
@@ -36,7 +36,7 @@
 ### Subgroup Analysis — Performance by Province
 
 **Observations:**
-- Recall ranges from 0.05 to 1.00 across provinces.
+- Recall ranges from 0.00 to 1.00 across provinces.
 
 **Implication:**
 - Meaningful performance variation across provinces — worth investigating whether this reflects sample size differences or genuine regional feature distribution differences.
@@ -47,7 +47,7 @@
 ### Subgroup Analysis — Performance by Province (Revised)
 
 **Observations:**
-- Recall varies substantially by province: from 0.05 (Province 5) to 1.00 (Province 1).
+- Recall varies substantially by province: from 0.00 (Province 5) to 1.00 (Province 1).
 - Sample sizes are reasonably balanced across provinces (n=86–113), reducing the likelihood this is purely a small-sample artifact.
 - Actual positive case counts per province: [fill in from the groupby output above]
 - Provinces 2, 3, and 5 show notably weaker recall (0.05–0.26) compared to Provinces 1, 4, and 6 (0.60–1.0).
@@ -63,7 +63,7 @@
 ### Decision Curve Analysis — Clinical Utility
 
 **Observations:**
-- The model provides positive net benefit over both "refer all" and "refer none" strategies across a threshold range of approximately 0.10 to 0.85.
+- The model provides positive net benefit over both "refer all" and "refer none" strategies across a threshold range of approximately 0.10 to 0.55.
 - Net benefit is maximized around threshold 0.10.
 
 **Implication for deployment:**
@@ -78,7 +78,7 @@
 
 **Observations:**
 - A chi-square test of independence between province and correct anemia detection yields p = 0.0000, indicating the observed disparity in detection rates across provinces is unlikely to be due to chance alone.
-- Detection (recall) ranges from 0.05 to 1.00 across provinces with reasonably comparable sample sizes (n=86-113).
+- Detection (recall) ranges from 0.00 to 1.00 across provinces with reasonably comparable sample sizes (n=86-113).
 
 **Implication — algorithmic fairness in health screening deployment:**
 - A single nationally-trained model does not provide equitable anemia detection across Nepal's provinces. Women in lower-recall provinces would be systematically under-flagged by this tool relative to women in higher-recall provinces.

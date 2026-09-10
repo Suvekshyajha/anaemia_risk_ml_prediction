@@ -1,7 +1,7 @@
 ### SHAP Explainability — XGBoost (Primary Model)
 
 **Observations:**
-- Top 3 features by mean |SHAP value|: v040, v024, v012
+- Top 3 features by mean |SHAP value|: v040, v445, v024
 - This ranking aligns with the permutation importance finding in notebook 08, where v040 (altitude) was the dominant feature.
 
 **Implication:**
@@ -13,11 +13,11 @@
 ### SHAP Explainability — Random Forest
 
 **Observations:**
-- Top 3 features: v040, secoreg, v024
-- Top feature overlap with XGBoost: 2 of top 5 features shared.
+- Top 3 features: v040, secoreg, v445
+- Top feature overlap with XGBoost: 3 of top 5 features shared.
 
 **Implication:**
-- Some divergence between models suggests feature importance may be sensitive to model architecture — worth discussing as a limitation.
+- Strong agreement across tree-based models increases confidence these features are genuinely predictive, not model-specific artifacts.
 
 
 ---
@@ -25,7 +25,7 @@
 ### SHAP Explainability — LightGBM
 
 **Observations:**
-- Top 3 features: v040, v012, v024
+- Top 3 features: v040, v445, v024
 
 
 ---
@@ -33,7 +33,7 @@
 ### SHAP Explainability — Logistic Regression
 
 **Observations:**
-- Top 3 features: secoreg_3, v024_5, v024_2
+- Top 3 features: secoreg_3, v012, v404_1
 
 **Implication:**
 - Since Logistic Regression is linear, SHAP values here directly reflect each feature's coefficient-weighted contribution — a useful, more transparent cross-check against the tree-based models' nonlinear explanations.
@@ -56,7 +56,7 @@
 ### Cross-Model SHAP Comparison — Tree-Based Models
 
 **Observations:**
-- Features consistently important across XGBoost, Random Forest, and LightGBM: v040, v024, secoreg
+- Features consistently important across XGBoost, Random Forest, and LightGBM: v040, v445, v024
 - These three models share identical (label-encoded) feature representations, making this comparison directly valid — unlike a comparison including one-hot encoded linear/SVM models, which use a different feature space and are not row-aligned.
 
 **Implication for the study's core contribution:**
