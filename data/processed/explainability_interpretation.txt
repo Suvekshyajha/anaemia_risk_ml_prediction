@@ -53,18 +53,6 @@
 
 ---
 
-### Cross-Model SHAP Comparison
-
-**Observations:**
-- Features consistently important across most/all models: v040, secoreg_3, v012
-- This cross-model agreement is the strongest evidence for which features are genuinely predictive of anemia risk in this rural Nepali population, versus being artifacts of any single algorithm's structure.
-
-**Implication for the study's core contribution:**
-- These consistently important features should be the focus of the discussion section — both as model-driven insights and as candidates for real-world screening/intervention prioritization.
-
-
----
-
 ### Cross-Model SHAP Comparison — Tree-Based Models
 
 **Observations:**

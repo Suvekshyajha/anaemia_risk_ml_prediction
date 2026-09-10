@@ -46,20 +46,20 @@
 
 ### XGBoost
 
-**Best Hyperparameters (5-fold Stratified CV, optimized for recall):** {'learning_rate': 0.03, 'max_depth': 4, 'best_iteration': 113}
+**Best Hyperparameters (5-fold Stratified CV, optimized for recall):** {'learning_rate': 0.03, 'max_depth': 4, 'best_iteration': 134}
 **CV Recall Score:** 0.577
 
 **Test Set Metrics:**
-- Accuracy: 0.705
-- Precision: 0.533
-- Recall (Sensitivity): 0.535
-- F1 Score: 0.534
-- AUC: 0.700
+- Accuracy: 0.692
+- Precision: 0.511
+- Recall (Sensitivity): 0.531
+- F1 Score: 0.521
+- AUC: 0.704
 
-**Confusion Matrix:** TN=362, FP=100, FN=99, TP=114
+**Confusion Matrix:** TN=354, FP=108, FN=100, TP=113
 
 **Interpretation:**
-- Correctly identifies 53.5% of truly anemic women (recall) — moderate for this health screening context.
-- Of women predicted anemic, 53.3% actually are (precision).
-- AUC of 0.700 indicates moderate discriminative ability.
-- False negatives (missed anemia cases): 99.
+- Correctly identifies 53.1% of truly anemic women (recall) — moderate for this health screening context.
+- Of women predicted anemic, 51.1% actually are (precision).
+- AUC of 0.704 indicates moderate discriminative ability.
+- False negatives (missed anemia cases): 100.

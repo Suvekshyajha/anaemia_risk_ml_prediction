@@ -41,19 +41,19 @@
 ### KNN
 
 **Metrics:**
-- Accuracy: 0.708
-- Precision: 0.565
-- Recall (Sensitivity): 0.329
-- F1 Score: 0.415
-- AUC: 0.700
+- Accuracy: 0.689
+- Precision: 0.513
+- Recall (Sensitivity): 0.286
+- F1 Score: 0.367
+- AUC: 0.659
 
-**Confusion Matrix:** TN=408, FP=54, FN=143, TP=70
+**Confusion Matrix:** TN=404, FP=58, FN=152, TP=61
 
 **Interpretation:**
-- The model correctly identifies 32.9% of truly anemic women (recall) — this is weak for a health screening context, where missing an anemic case (false negative) is costly.
-- Of women predicted anemic, 56.5% actually are (precision).
-- AUC of 0.700 indicates moderate ability to distinguish anemic from non-anemic women overall.
-- False negatives (missed anemia cases): 143 — a concerning number given clinical implications.
+- The model correctly identifies 28.6% of truly anemic women (recall) — this is weak for a health screening context, where missing an anemic case (false negative) is costly.
+- Of women predicted anemic, 51.3% actually are (precision).
+- AUC of 0.659 indicates moderate ability to distinguish anemic from non-anemic women overall.
+- False negatives (missed anemia cases): 152 — a concerning number given clinical implications.
 
 
 ---
